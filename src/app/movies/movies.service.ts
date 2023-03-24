@@ -1,11 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
-import { ApiPopularResponse, Movie } from './types';
+import { ApiGenreResponse, ApiPopularResponse, Movie } from './types';
 
 @Injectable()
 export class MoviesService {
   constructor(private http: HttpClient) {}
+
+  getGenres() {
+    return this.http
+      .get<ApiGenreResponse>(
+        'https://api.themoviedb.org/3/genre/movie/list?api_key=798865d2515c75e1f2966a2ca026c110&language=fr-FR'
+      )
+      .pipe(map((apiResponse) => apiResponse.genres));
+  }
 
   getPopularMovies() {
     return this.http
