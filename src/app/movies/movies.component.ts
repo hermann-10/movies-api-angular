@@ -27,18 +27,8 @@ export class MoviesComponent implements OnInit {
   constructor(private service: MoviesService) {}
 
   ngOnInit(): void {
-    const request = this.service.getPopularMovies();
-
-    request.subscribe((response) => {
-      this.movies = response.results.map((item) => {
-        return {
-          id: item.id,
-          title: item.title,
-          description: item.overview,
-          rating: item.vote_average,
-          image: 'https://image.tmdb.org/t/p/w500/' + item.poster_path,
-        };
-      });
-    });
+    this.service
+      .getPopularMovies()
+      .subscribe((movies) => (this.movies = movies));
   }
 }
