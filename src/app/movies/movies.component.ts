@@ -4,8 +4,19 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-movies',
   template: `
     <div class="row">
-      <div class="col-4" *ngFor="let movie of movies">
-        <strong>{{ movie.title }}</strong>
+      <div class="col-4 mb-2" *ngFor="let movie of movies">
+        <div class="card">
+          <img
+            src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}"
+            alt=""
+            class="card-img-top"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ movie.title }}</h5>
+            <p>{{ movie.overview }}</p>
+          </div>
+        </div>
+        <strong></strong>
       </div>
     </div>
   `,
