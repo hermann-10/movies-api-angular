@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -24,15 +25,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MoviesComponent implements OnInit {
   movies: any[] = [];
-  constructor() {}
+
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    fetch(
+    const request = this.http.get(
       'https://api.themoviedb.org/3/movie/popular?api_key=798865d2515c75e1f2966a2ca026c110&language=fr-FR&page=2'
-    )
-      .then((response) => response.json())
-      .then((result: any) => {
-        this.movies = result.results;
-      });
+    );
+
+    request.subscribe((response: any) => {
+      this.movies = response.results;
+    });
   }
 }
